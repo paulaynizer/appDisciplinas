@@ -1,0 +1,40 @@
+<ion-header style="background-color: #9ce0c6; padding-top: 10px;">
+  <ion-toolbar>
+    <ion-title style="background-color: #9ce0c6;color: white;">
+      Disciplinas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="conteudo" style="background-color: white; border-radius:50px 50px 0px 0px">
+    <ion-list style="background-color: white; border-radius:50px 50px 0px 0px">
+      <ion-item-sliding *ngFor="let disciplina of disciplinas" >
+
+        <ion-card style="background-color: white;">
+
+          <ion-card-content (click)="irParaDetalhar(disciplina)">
+            <div class="info">
+              <ion-icon name="ellipse" style="zoom:1.8;"></ion-icon>
+              <div class="info2">
+                <ion-card-title>{{disciplina.nome}}</ion-card-title>
+                <ion-card-subtitle>{{disciplina.professor}}</ion-card-subtitle>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-item-options slide="end">
+          <ion-item-option (click)="irParaDetalhar(disciplina)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irParaCadastrar()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

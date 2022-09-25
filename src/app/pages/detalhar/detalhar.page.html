@@ -1,0 +1,127 @@
+<ion-header style="background-color: #9ce0c6; padding-top: 10px;">
+  <ion-toolbar style="display:flex;">
+    <ion-buttons slot="start">
+      <ion-icon name="chevron-back-outline" style="zoom:1.8; color: white;" (click)="irParaHome()"></ion-icon>
+    </ion-buttons>
+    <ion-title style="background-color: #9ce0c6;color: white; font-size: 25px;">Detalhar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="conteudo" style="background-color: white; border-radius:50px 50px 0px 0px">
+    <ion-list style=" border-radius:50px 50px 0px 0px">
+      <ion-item>
+        <ion-label>Habilitar Edição</ion-label>
+        <ion-toggle color="sucess" (ionChange)="alterarEdicao()"></ion-toggle>
+      </ion-item>
+
+      <form [formGroup]="form_detalhar" (ngSubmit)="submitForm()">
+
+        <!-- Nome -->
+        <ion-item>
+          <ion-input placeholder="Nome" formControlName="nome" disabled="{{edicao}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="(((errorControl.nome.touched) || (errorControl.nome.dirty)) && errorControl.nome.errors)">
+          <span *ngIf="errorControl.nome.errors?.required">
+            Nome é obrigatório!
+          </span>
+        </ion-item>
+
+        <!-- Professor -->
+        <ion-item>
+          <ion-input placeholder="Professor" formControlName="professor" disabled="{{edicao}}"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="(((errorControl.professor.touched)||(errorControl.professor.dirty))&& errorControl.professor.errors)">
+          <span *ngIf="errorControl.professor.errors?.required">
+            Professor é obrigatório!
+          </span>
+        </ion-item>
+
+        <!-- Carga Horaria -->
+        <ion-item>
+          <ion-input placeholder="Carga horária" formControlName="cargaHoraria" disabled="{{edicao}}"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="(((errorControl.cargaHoraria.touched)||(errorControl.cargaHoraria.dirty))&& errorControl.cargaHoraria.errors)">
+          <span *ngIf="errorControl.cargaHoraria.errors?.required">
+            Carga Horaria é obrigatório!
+          </span>
+        </ion-item>
+
+        <!-- Natureza -->
+        <ion-item>
+          <ion-select placeholder="Selecione a Natureza" formControlName="natureza" disabled="{{edicao}}">
+            <ion-select-option value="obrigatoria">Obrigatória</ion-select-option>
+            <ion-select-option value="optativa">Optativa</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item
+          *ngIf="(((errorControl.natureza.touched)||(errorControl.natureza.dirty))&& errorControl.natureza.errors)">
+          <span *ngIf="errorControl.natureza.errors?.required">
+            Natureza é obrigatório!
+          </span>
+        </ion-item>
+
+        <!-- Data de Inicio -->
+        <ion-item>
+          <ion-label>Data de Início: </ion-label>
+          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime" presentation="date" formControlName="dataInicio" disabled="{{edicao}}">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <!-- Data de Termino -->
+        <ion-item>
+          <ion-label>Data de Término: </ion-label>
+          <ion-datetime-button datetime="datetime2"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime2" presentation="date" formControlName="dataFim" disabled="{{edicao}}">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-item>
+
+        <!-- Vagas -->
+        <ion-item>
+          <ion-label>Quantidade de vagas: </ion-label>
+          <ion-input placeholder="Vagas" formControlName="vagas" disabled="{{edicao}}"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="(((errorControl.vagas.touched)||(errorControl.vagas.dirty))&& errorControl.vagas.errors)">
+          <span *ngIf="errorControl.vagas.errors?.required">
+            Vagas é obrigatório!
+          </span>
+        </ion-item>
+
+        <!-- Modalidades -->
+        <ion-radio-group value="online" formControlName="modalidade" disabled="{{edicao}}">
+          <ion-label>Modalidade: </ion-label>
+          <ion-item>
+            <ion-label>Online</ion-label>
+            <ion-radio slot="start" color="success" value="online" disabled="{{edicao}}"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Presencial</ion-label>
+            <ion-radio slot="start" color="tertiary" value="presencial" disabled="{{edicao}}"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Híbrido</ion-label>
+            <ion-radio slot="start" color="danger" value="hibrido" disabled="{{edicao}}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-item>
+          <ion-button disabled="{{edicao}}" size="small" style="height: 40px;" shape="round">
+            <input type="file" formControlName="imagem" (change)="uploadFile($event.target)" />
+          </ion-button>
+        </ion-item>
+        <ion-button disabled="{{edicao}}" expand="block" (click)="editar()" color="success" style="margin-block: 15px;">Editar</ion-button>
+        <ion-button disabled="{{edicao}}" expand="block" (click)="excluir()" color="danger">Excluir</ion-button>
+      </form>
+    </ion-list>
+  </div>
+</ion-content>

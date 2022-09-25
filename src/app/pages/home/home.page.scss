@@ -1,0 +1,39 @@
+.info{
+  display: flex;
+  align-items: center;
+}
+.info2{
+  padding-left: 5px;
+}
+ion-header{
+  height: 80px;
+}
+ion-content{
+  --ion-background-color: #9ce0c6;
+}
+ion-list{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+ion-title{
+  font-size: 25px;
+}
+ion-card-title{
+  font-size: 23px;
+}
+ion-card{
+  margin-bottom: 5px;
+  margin-top: 10px;
+  --color:#9ce0c6;
+  box-shadow: rgb(0 0 0 / 12%) 0px 2px 4px;
+}
+.conteudo{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+
+}
+ion-fab-button{
+  --background:#9ce0c6;
+  --background-activated:#449878;
+}
