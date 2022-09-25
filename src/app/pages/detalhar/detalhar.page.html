@@ -9,6 +9,9 @@
 
 <ion-content>
   <div class="conteudo" style="background-color: white; border-radius:50px 50px 0px 0px">
+    <ion-avatar style="margin: auto; width: 80px; height: 80px; border: 5px;">
+      <ion-img style="width: 80px; height: 80px; " src={{disciplina.downloadURL}}></ion-img>
+    </ion-avatar>
     <ion-list style=" border-radius:50px 50px 0px 0px">
       <ion-item>
         <ion-label>Habilitar Edição</ion-label>
@@ -116,7 +119,7 @@
         </ion-radio-group>
         <ion-item>
           <ion-button disabled="{{edicao}}" size="small" style="height: 40px;" shape="round">
-            <input type="file" formControlName="imagem" (change)="uploadFile($event.target)" />
+            <input type="file"  (change)="uploadFile($event.target)" />
           </ion-button>
         </ion-item>
         <ion-button disabled="{{edicao}}" expand="block" (click)="editar()" color="success" style="margin-block: 15px;">Editar</ion-button>

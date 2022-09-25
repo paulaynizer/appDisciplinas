@@ -37,7 +37,7 @@ export class DisciplinaFirebaseService {
         professor: disciplina.professor,
         vagas: disciplina.vagas,
         modalidade: disciplina.modalidade,
-        downloadURL: disciplina.dowloadURL
+        downloadURL: disciplina.downloadURL
       });
   }
   editarDisciplina(disciplina: Disciplina, id: string) {
@@ -53,7 +53,7 @@ export class DisciplinaFirebaseService {
         vagas: disciplina.vagas,
         professor: disciplina.professor,
         modalidade: disciplina.modalidade, 
-        downloadURL:  disciplina.dowloadURL,
+        downloadURL:  disciplina.downloadURL,
       });
   }
   excluirDisciplina(disciplina: Disciplina) {
@@ -75,7 +75,7 @@ export class DisciplinaFirebaseService {
       finalize(() => {
         let uploadedFileURL = fileRef.getDownloadURL();
         uploadedFileURL.subscribe((resp) => {
-          disciplina.dowloadURL = resp;
+          disciplina.downloadURL = resp;
           this.inserirDisciplina(disciplina);
         })
       })
@@ -95,7 +95,7 @@ export class DisciplinaFirebaseService {
       finalize(() => {
         let uploadedFileURL = fileRef.getDownloadURL();
         uploadedFileURL.subscribe((resp) => {
-          disciplina.dowloadURL = resp;
+          disciplina.downloadURL = resp;
           this.editarDisciplina(disciplina, id);
         })
       })

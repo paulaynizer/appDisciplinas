@@ -78,11 +78,11 @@ export class Disciplina {
     public set professor(professor: string){
         this._professor=professor;
     }
-    public set dowloadURL(downloadURL : any){
+    public set downloadURL(downloadURL : any){
         this._downloadURL = downloadURL;
     }
     
-    public get dowloadURL(){
+    public get downloadURL(){
         return this._downloadURL;
     }
 }

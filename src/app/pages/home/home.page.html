@@ -13,13 +13,16 @@
 
         <ion-card style="background-color: white;">
 
-          <ion-card-content (click)="irParaDetalhar(disciplina)">
+          <ion-card-content (click)="irParaDetalhar(disciplina)" >
             <div class="info">
               <ion-icon name="ellipse" style="zoom:1.8;"></ion-icon>
               <div class="info2">
                 <ion-card-title>{{disciplina.nome}}</ion-card-title>
                 <ion-card-subtitle>{{disciplina.professor}}</ion-card-subtitle>
               </div>
+              <ion-avatar style="margin-left: auto; width: 60px; height: 60px; border: 5px; box-shadow: 5px;">
+                <ion-img src={{disciplina.downloadURL}} style="box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;"></ion-img>
+              </ion-avatar>
             </div>
           </ion-card-content>
         </ion-card>

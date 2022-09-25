@@ -27,7 +27,7 @@ export class DetalharPage implements OnInit {
     this.imagem = imagem.files;
   }
   ngOnInit() {
-    
+    console.log("imagem " + this.imagem);
     const nav = this.router.getCurrentNavigation();
     this.disciplina = nav.extras.state.objeto;
     this.data = new Date().toISOString();
@@ -40,8 +40,9 @@ export class DetalharPage implements OnInit {
       vagas: [this.disciplina.vagas, [Validators.required]],
       modalidade: [this.disciplina.modalidade, [Validators.required]],
       professor: [this.disciplina.professor, [Validators.required]],
-      imagem: [this.disciplina.dowloadURL, [Validators.required]]
+      downloadURL:[this.disciplina.downloadURL]
     });
+    console.log(this.disciplina.downloadURL);
   }
 
   get errorControl() {
@@ -67,15 +68,26 @@ export class DetalharPage implements OnInit {
   }
 
   editar() {
-    this.disciplinaFS.atualizaImagem(this.form_detalhar.value, this.disciplina.id, this.imagem)
-    .then(()=>{
-      this.presentAlert("Disciplinas", "Sucesso", "Disciplina Editada!");
-      this.router.navigate(["/home"]);
-    })
-    .catch((error)=>{
-      this.presentAlert("Disciplinas", "Erro", "Erro ao editar");
-      console.log(error);
-    })
+    if(this.imagem != undefined){
+      this.disciplinaFS.atualizaImagem(this.form_detalhar.value, this.disciplina.id, this.imagem).then(()=>{
+        this.presentAlert("Disciplinas", "Sucesso", "Disciplina Editada!");
+        this.router.navigate(["/home"]);
+      })
+      .catch((error)=>{
+        this.presentAlert("Disciplinas", "Erro", "Erro ao editar");
+        console.log(error);
+      })
+    }else{
+      console.log("entra no undefined");
+      this.disciplinaFS.editarDisciplina(this.form_detalhar.value, this.disciplina.id).then(()=>{
+        this.presentAlert("Disciplinas", "Sucesso", "Disciplina Editada!");
+        this.router.navigate(["/home"]);
+      })
+      .catch((error)=>{
+        this.presentAlert("Disciplinas", "Erro", "Erro ao editar");
+        console.log(error);
+      })
+    }
   }
 
   excluir(){
