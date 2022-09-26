@@ -23,11 +23,11 @@ export class DisciplinaFirebaseService {
       .collection(this.PATH)
       .snapshotChanges();
   }
-  inserirDisciplina(disciplina: Disciplina) {
-    let itemId = new Date().getTime();
+  inserirDisciplina(disciplina: Disciplina, id:any) {
+
     return this.angularFirestore
       .collection(this.PATH)
-      .doc(itemId.toString())
+      .doc(id.toString())
       .set({
         nome: disciplina.nome,
         cargaHoraria: disciplina.cargaHoraria,
@@ -57,18 +57,24 @@ export class DisciplinaFirebaseService {
       });
   }
   excluirDisciplina(disciplina: Disciplina) {
+    this.excluirImagem(disciplina);
     return this.angularFirestore
       .collection(this.PATH)
       .doc(disciplina.id)
       .delete();
   }
+  excluirImagem(disciplina: Disciplina){
+    const path = `images/${disciplina.id}`;
+    return this.angularFireStorage.ref(path).delete();
+  }
   enviarImagem(imagem: any, disciplina: Disciplina) {
+    let itemId = new Date().getTime();
     const file = imagem.item(0);
     if (file.type.split('/')[0] !== 'image') {
       console.error('Tipo não suportado');
       return;
     }
-    const path = `images/${disciplina.id}`;
+    const path = `images/${itemId}`;
     const fileRef = this.angularFireStorage.ref(path);
     let task = this.angularFireStorage.upload(path, file);
     task.snapshotChanges().pipe(
@@ -76,7 +82,7 @@ export class DisciplinaFirebaseService {
         let uploadedFileURL = fileRef.getDownloadURL();
         uploadedFileURL.subscribe((resp) => {
           disciplina.downloadURL = resp;
-          this.inserirDisciplina(disciplina);
+          this.inserirDisciplina(disciplina, itemId);
         })
       })
     ).subscribe();

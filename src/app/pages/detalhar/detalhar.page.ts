@@ -95,7 +95,7 @@ export class DetalharPage implements OnInit {
     "Você realmente deseja excluir a disciplina?");
   }
 
-  private excluirContato(){
+  private excluirDisciplina(){
     this.disciplinaFS.excluirDisciplina(this.disciplina)
     .then(()=>{
       this.presentAlert("Disciplinas", "Sucesso", "Disciplina Excluida!");
@@ -138,7 +138,7 @@ export class DetalharPage implements OnInit {
           text: 'Confirmar',
           role: 'confirm',
           handler: () => {
-            this.excluirContato();
+            this.excluirDisciplina();
           },
         },
       ],
