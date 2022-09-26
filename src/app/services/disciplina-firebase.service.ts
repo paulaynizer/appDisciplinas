@@ -12,7 +12,6 @@ export class DisciplinaFirebaseService {
   private PATH: string = 'disciplinas';
   constructor(private angularFirestore: AngularFirestore,
   private angularFireStorage: AngularFireStorage) { }
-  itemId = new Date().getTime()
   getDisciplina(id: string) {
     return this.angularFirestore
       .collection(this.PATH)
@@ -25,9 +24,10 @@ export class DisciplinaFirebaseService {
       .snapshotChanges();
   }
   inserirDisciplina(disciplina: Disciplina) {
+    let itemId = new Date().getTime();
     return this.angularFirestore
       .collection(this.PATH)
-      .doc(this.itemId.toString())
+      .doc(itemId.toString())
       .set({
         nome: disciplina.nome,
         cargaHoraria: disciplina.cargaHoraria,
@@ -68,7 +68,7 @@ export class DisciplinaFirebaseService {
       console.error('Tipo não suportado');
       return;
     }
-    const path = `images/${this.itemId}`;
+    const path = `images/${disciplina.id}`;
     const fileRef = this.angularFireStorage.ref(path);
     let task = this.angularFireStorage.upload(path, file);
     task.snapshotChanges().pipe(
