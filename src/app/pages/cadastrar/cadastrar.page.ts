@@ -26,15 +26,16 @@ export class CadastrarPage implements OnInit {
     this.data= new Date().toISOString();
     this.form_cadastrar = this.formBuilder.group({
       nome: ["", [Validators.required]],
-      cargaHoraria: ["", [Validators.required]],
+      cargaHoraria: ["", [Validators.required, Validators.min(1), Validators.max(1000)]],
       natureza: ["", [Validators.required]],
       dataInicio: ["", [Validators.required]],
-      dataFim: ["", [Validators.required]],
-      vagas: ["", [Validators.required]],
+      dataFim: ['2022-12-23', [Validators.required]],
+      vagas: ["", [Validators.required], Validators.min(1), Validators.max(100)],
       modalidade: ["", [Validators.required]],
       professor: ["", [Validators.required]],
       imagem:["", [Validators.required]]
-    });
+    }
+    );
   }
   uploadFile(imagem : any){
     this.imagem = imagem.files;
@@ -67,7 +68,7 @@ export class CadastrarPage implements OnInit {
       this.presentAlert("Disciplinas", "Erro", "Erro ao cadastrar");
       console.log(error);
     })
-    
+
   }
 
   async presentAlert(header: string, subHeader: string, message:string) {

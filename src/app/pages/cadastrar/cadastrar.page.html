@@ -12,9 +12,11 @@
   <div class="conteudo" style="background-color: white; border-radius:50px 50px 0px 0px">
     <ion-list style=" border-radius:50px 50px 0px 0px">
       <form [formGroup]="form_cadastrar" (ngSubmit)="submitForm()">
+
+        <!-- Nome -->
         <ion-item>
           <ion-label>Nome: </ion-label>
-          <ion-input placeholder="Nome da disciplina" formControlName="nome"></ion-input>
+          <ion-input placeholder="Nome da disciplina" formControlName="nome" clearInput=true></ion-input>
         </ion-item>
         <ion-item *ngIf="(((errorControl.nome.touched)||(errorControl.nome.dirty))&& errorControl.nome.errors)">
           <span *ngIf="errorControl.nome.errors?.required">
@@ -22,9 +24,10 @@
           </span>
         </ion-item>
 
+        <!-- Professor -->
         <ion-item>
           <ion-label>Professor: </ion-label>
-          <ion-input placeholder="Professor responsável" formControlName="professor"></ion-input>
+          <ion-input placeholder="Professor responsável" formControlName="professor" clearInput=true></ion-input>
         </ion-item>
         <ion-item
           *ngIf="(((errorControl.professor.touched)||(errorControl.professor.dirty))&& errorControl.professor.errors)">
@@ -33,20 +36,25 @@
           </span>
         </ion-item>
 
+        <!-- Carga Horária -->
         <ion-item>
           <ion-label>Carga Horaria: </ion-label>
-          <ion-input placeholder="Carga horária" formControlName="cargaHoraria"></ion-input>
+          <ion-input placeholder="Carga horária" formControlName="cargaHoraria" clearInput=true></ion-input>
         </ion-item>
         <ion-item
           *ngIf="(((errorControl.cargaHoraria.touched)||(errorControl.cargaHoraria.dirty))&& errorControl.cargaHoraria.errors)">
           <span *ngIf="errorControl.cargaHoraria.errors?.required">
             Carga Horaria é obrigatório!
           </span>
+          <span *ngIf="errorControl.cargaHoraria.errors?.max || errorControl.cargaHoraria.errors?.min" >
+            Carga Horária deve estar entre 1 e 100!
+          </span>
         </ion-item>
 
+        <!-- Natureza -->
         <ion-item>
           <ion-label>Natureza: </ion-label>
-          <ion-select placeholder="Selecione a Natureza" formControlName="natureza">
+          <ion-select placeholder="Selecione a Natureza" formControlName="natureza" >
             <ion-select-option value="obrigatoria">Obrigatória</ion-select-option>
             <ion-select-option value="optativa">Optativa</ion-select-option>
           </ion-select>
@@ -58,38 +66,45 @@
           </span>
         </ion-item>
 
+        <!-- Data inicio -->
         <ion-item>
           <ion-label>Data de Início: </ion-label>
           <ion-datetime-button datetime="datetime"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime" presentation="date" formControlName="dataInicio">
+              <ion-datetime id="datetime" min="{{data}}" presentation="date" formControlName="dataInicio">
               </ion-datetime>
             </ng-template>
           </ion-modal>
         </ion-item>
 
+        <!-- Data Fim -->
         <ion-item>
           <ion-label>Data de Término: </ion-label>
           <ion-datetime-button datetime="datetime2"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime2" presentation="date" formControlName="dataFim">
+              <ion-datetime id="datetime2" min="{{data}}" presentation="date" formControlName="dataFim"> <!-- lessDate="{{dataInicio.value}}" -->
               </ion-datetime>
             </ng-template>
           </ion-modal>
         </ion-item>
 
+        <!-- Vagas -->
         <ion-item>
           <ion-label>Quantidade de vagas: </ion-label>
-          <ion-input placeholder="Vagas" formControlName="vagas"></ion-input>
+          <ion-input placeholder="Vagas" formControlName="vagas" clearInput=true></ion-input>
         </ion-item>
         <ion-item *ngIf="(((errorControl.vagas.touched)||(errorControl.vagas.dirty))&& errorControl.vagas.errors)">
           <span *ngIf="errorControl.vagas.errors?.required">
             Vagas é obrigatório!
           </span>
+          <span *ngIf="errorControl.vagas.errors?.max || errorControl.vagas.errors?.min" >
+            Vagas deve estar entre 1 e 100!
+          </span>
         </ion-item>
 
+        <!-- Modalidade -->
         <ion-radio-group value="online" formControlName="modalidade" disabled="{{edicao}}">
           <ion-label>Modalidade: </ion-label>
           <ion-item>
@@ -105,8 +120,10 @@
             <ion-radio slot="start" color="danger" value="hibrido"></ion-radio>
           </ion-item>
         </ion-radio-group>
+
+        <!-- Imagem -->
         <ion-item>
-          <ion-button  size="small" style="height: 40px;" shape="round">
+          <ion-button size="small" style="height: 40px;" shape="round">
             <input type="file" formControlName="imagem" (change)="uploadFile($event.target)" />
           </ion-button>
         </ion-item>
@@ -118,7 +135,7 @@
     </ion-list>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="irParaHome()">
+    <ion-fab-button (click)="irParaHome()" >
       <ion-icon name="home"></ion-icon>
     </ion-fab-button>
   </ion-fab>

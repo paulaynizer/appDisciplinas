@@ -33,11 +33,11 @@ export class DetalharPage implements OnInit {
     this.data = new Date().toISOString();
     this.form_detalhar = this.formBuilder.group({
       nome: [this.disciplina.nome, [Validators.required]],
-      cargaHoraria: [this.disciplina.cargaHoraria, [Validators.required]],
+      cargaHoraria: [this.disciplina.cargaHoraria, [Validators.required, Validators.min(1), Validators.max(100)]],
       natureza: [this.disciplina.natureza, [Validators.required]],
       dataInicio: [this.disciplina.dataInicio, [Validators.required]],
       dataFim: [this.disciplina.dataFim, [Validators.required]],
-      vagas: [this.disciplina.vagas, [Validators.required]],
+      vagas: [this.disciplina.vagas, [Validators.required,  Validators.min(1), Validators.max(100)]],
       modalidade: [this.disciplina.modalidade, [Validators.required]],
       professor: [this.disciplina.professor, [Validators.required]],
       downloadURL:[this.disciplina.downloadURL]
