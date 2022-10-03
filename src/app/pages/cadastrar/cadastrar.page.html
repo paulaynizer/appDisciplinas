@@ -69,10 +69,11 @@
         <!-- Data inicio -->
         <ion-item>
           <ion-label>Data de Início: </ion-label>
-          <ion-datetime-button datetime="datetime"></ion-datetime-button>
+          <ion-datetime-button datetime="datetime" ></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime" min="{{data}}" presentation="date" formControlName="dataInicio">
+              <ion-datetime id="datetime" [isDateEnabled]="isWeekday" min="{{data}}"
+               presentation="date" formControlName="dataInicio" (ionChange)="dataLimit(data)">
               </ion-datetime>
             </ng-template>
           </ion-modal>
@@ -84,7 +85,8 @@
           <ion-datetime-button datetime="datetime2"></ion-datetime-button>
           <ion-modal [keepContentsMounted]="true">
             <ng-template>
-              <ion-datetime id="datetime2" min="{{data}}" presentation="date" formControlName="dataFim"> <!-- lessDate="{{dataInicio.value}}" -->
+              <ion-datetime id="datetime2" [isDateEnabled]="isWeekday" min="{{data}}"
+              presentation="date" formControlName="dataFim" > <!-- lessDate="{{dataInicio.value}}" -->
               </ion-datetime>
             </ng-template>
           </ion-modal>

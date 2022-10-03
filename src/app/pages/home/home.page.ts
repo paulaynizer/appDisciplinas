@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Disciplina } from 'src/app/models/disciplina';
 import { DisciplinaFirebaseService } from 'src/app/services/disciplina-firebase.service';
-import { DisciplinaService } from 'src/app/services/disciplina.service';
+
 
 @Component({
   selector: 'app-home',
